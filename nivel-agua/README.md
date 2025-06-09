@@ -29,7 +29,7 @@ Este proyecto permite medir el nivel de un depósito de agua en una furgoneta ca
 
 Este proyecto puede probarse inicialmente en simulación con Tinkercad antes de montarlo físicamente en la furgoneta camper.
 
-![Esquema simulado en Tinkercad](./montaje_tinkercad.png)
+![Esquema simulado en Tinkercad](./conexiones_test.jpg)
 
 🔗 Puedes abrir y editar el esquema en Tinkercad con este enlace:  
 👉 [Ver esquema interactivo en Tinkercad](https://www.tinkercad.com/things/cCpKPm8uOsk-exquisite-jaban-kasi/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard&sharecode=BV8qEtDc70B2P_7Hoq8YbehSrz2DRoChgAIa5x-gDt8)
@@ -55,7 +55,7 @@ Este proyecto puede probarse inicialmente en simulación con Tinkercad antes de 
 | GND             | `GND`                | `GND`                         |
 
 📌 **Importante:**  
-- El ESP32 **trabaja a 3.3 V**, así que no alimentes el divisor desde 5V.  
+- El ESP32 **trabaja a 3.3 V**, así que no alimentes el divisor desde 5 V.  
 - `GPIO34` es una entrada analógica válida y segura en el ESP32.
 
 ---
