@@ -29,7 +29,7 @@ Este proyecto permite medir el nivel de un depósito de agua en una furgoneta ca
 
 Este proyecto puede probarse inicialmente en simulación con Tinkercad antes de montarlo físicamente en la furgoneta camper.
 
-![Esquema simulado en Tinkercad](./conexiones_test.jpg)
+![Esquema simulado en Tinkercad](https://github.com/federicovallsrodriguez/Tecnovan/blob/8e6413d577dad450fd00f11f9be987216ec75f31/nivel-agua/conexiones%20test.jpg)
 
 🔗 Puedes abrir y editar el esquema en Tinkercad con este enlace:  
 👉 [Ver esquema interactivo en Tinkercad](https://www.tinkercad.com/things/cCpKPm8uOsk-exquisite-jaban-kasi/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard&sharecode=BV8qEtDc70B2P_7Hoq8YbehSrz2DRoChgAIa5x-gDt8)
