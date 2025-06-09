@@ -1,1 +1,59 @@
+esphome:
+  name: nivelagua         # 🔧 Nombre del dispositivo (sin espacios ni acentos)
+  friendly_name: "Nivel de agua ESP"  # 🏷️ Nombre descriptivo para Home Assistant
+
+esp32:
+  board: esp32dev         # 🧠 Tipo de placa (no cambiar si usas una ESP32 genérica)
+
+wifi:
+  ssid: "TUNOMBREDEWIFI"       # 📶 Reemplaza con el nombre de tu red Wi-Fi
+  password: "TUPASSWORD"       # 🔐 Reemplaza con la contraseña de tu red
+
+  manual_ip:                  # 🌐 Configura una IP estática si lo deseas (recomendado)
+    static_ip: 192.168.X.XXX  # 👉 Sustituye con una IP libre dentro de tu red local
+    gateway: 192.168.X.1       # Dirección del router (generalmente termina en .1)
+    subnet: 255.255.255.0      # No suele cambiar
+
+logger:                        # 📝 Activa los mensajes de diagnóstico por red (no modificar)
+
+api:                           # 🤝 Permite que Home Assistant se conecte al ESP32
+  password: ""                 # 🔑 Puedes dejarlo vacío o poner una clave para mayor seguridad
+
+sensor:
+  # SENSOR 1 – Voltaje crudo leído desde la boya resistiva
+  - platform: adc
+    pin: GPIO34                  # 📍 Pin analógico del ESP32 conectado al divisor de tensión
+    name: "voltaje boya"
+    id: voltaje_boya
+    attenuation: 12db            # 🎚️ Configura el rango de lectura del ADC (12 dB = máx. 3.3 V)
+    update_interval: 5s          # ⏱️ Cada cuántos segundos se hace una medición
+    accuracy_decimals: 2         # 🔍 Solo muestra 2 decimales para evitar ruido excesivo
+    filters:
+      - exponential_moving_average:
+          alpha: 0.05            # 📊 Suaviza variaciones rápidas para una lectura más estable
+          send_every: 1
+
+  # SENSOR 2 – Porcentaje de agua calculado linealmente a partir del voltaje
+  - platform: template
+    name: "nivel de agua ESP"
+    update_interval: 5s
+    unit_of_measurement: "%"
+    accuracy_decimals: 1
+    lambda: |-
+      // Leer el voltaje actual, redondear a 2 decimales
+      float v = round(id(voltaje_boya).state * 100.0f) / 100.0f;
+      float porcentaje = 0.0f;
+
+      // Ajustar aquí el valor máximo de voltaje según la resistencia y boya usada
+      float voltaje_maximo = 1.58f; // 🔁 CAMBIAR si en tu boya el máximo es distinto
+
+      // Calcular porcentaje lineal entre 0 V (0%) y voltaje_maximo (100%)
+      porcentaje = (v / voltaje_maximo) * 100.0f;
+
+      // Limitar el resultado a entre 0% y 100%
+      porcentaje = std::min(std::max(porcentaje, 0.0f), 100.0f);
+
+      // Mostrar en logs de Home Assistant
+      ESP_LOGD("custom", "Voltaje leído: %.2f V → %.1f %%", v, porcentaje);
+      return porcentaje;
 
