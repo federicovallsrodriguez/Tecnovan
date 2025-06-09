@@ -22,3 +22,5 @@ Este proyecto permite medir el nivel de un depósito de agua en una furgoneta ca
 - `notas_extra.md`: consejos de montaje, problemas comunes y soluciones.
 
 🔧 **Configuración completa en el archivo `nivel_agua_esp.yaml`.**
+
+ Más consejos y notas en [notas_extra.md](./notas_extra.md)
