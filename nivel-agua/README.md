@@ -24,3 +24,39 @@ Este proyecto permite medir el nivel de un depósito de agua en una furgoneta ca
 🔧 **Configuración completa en el archivo `nivel_agua_esp.yaml`.**
 
  Más consejos y notas en [notas_extra.md](./notas_extra.md)
+
+## 🔌 Esquema de conexiones
+
+Este proyecto puede probarse inicialmente en simulación con Tinkercad antes de montarlo físicamente en la furgoneta camper.
+
+![Esquema simulado en Tinkercad](./montaje_tinkercad.png)
+
+🔗 Puedes abrir y editar el esquema en Tinkercad con este enlace:  
+👉 [Ver esquema interactivo en Tinkercad](https://www.tinkercad.com/things/cCpKPm8uOsk-exquisite-jaban-kasi/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard&sharecode=BV8qEtDc70B2P_7Hoq8YbehSrz2DRoChgAIa5x-gDt8)
+
+---
+
+### ⚠️ Advertencias importantes:
+
+> ⚠️ **1. El montaje en Tinkercad está hecho con un Arduino UNO, pero el circuito real utiliza un ESP32 DevKit.**  
+> Los pines de conexión deben adaptarse como se describe a continuación.
+
+> ⚠️ **2. La resistencia usada en el divisor de tensión del esquema original ha sido sustituida por una resistencia de 220 Ω en el montaje final.**  
+> Esto mejora la precisión en la lectura del voltaje que genera la boya resistiva.
+
+---
+
+### 🔁 Cómo sustituir Arduino UNO por ESP32 DevKit:
+
+| Función         | En Arduino UNO      | En ESP32 DevKit (recomendado) |
+|------------------|----------------------|-------------------------------|
+| Pin de lectura ADC | `A0`                 | `GPIO34`                      |
+| Alimentación     | `5V`                 | `3V3`                         |
+| GND             | `GND`                | `GND`                         |
+
+📌 **Importante:**  
+- El ESP32 **trabaja a 3.3 V**, así que no alimentes el divisor desde 5V.  
+- `GPIO34` es una entrada analógica válida y segura en el ESP32.
+
+---
+
